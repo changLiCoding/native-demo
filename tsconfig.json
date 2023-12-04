@@ -20,6 +20,8 @@
 		"expo-env.d.ts",
 		"app/_layout.js",
 		"constants/**/*",
-		"styles"
+		"styles",
+		"components/common/header/ScreenHeaderBtn.jsx",
+		"app/index.jsx"
 	]
 }
