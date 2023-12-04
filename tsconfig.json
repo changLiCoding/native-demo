@@ -22,6 +22,7 @@
 		"constants/**/*",
 		"styles",
 		"components/common/header/ScreenHeaderBtn.jsx",
-		"app/index.jsx"
+		"app/index.jsx",
+		"app/_layout.jsx"
 	]
 }
