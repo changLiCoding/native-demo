@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { X_RapidAPI_Key } from "@env";
-
-const rapidapiKey = X_RapidAPI_Key;
 
 const useFetch = (endpoint, query) => {
+	const rapidapiKey = process.env.X_RapidAPI_Key;
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);

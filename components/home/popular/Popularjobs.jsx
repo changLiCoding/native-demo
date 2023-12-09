@@ -10,7 +10,7 @@ import { useRouter } from "expo-router";
 import { COLORS, SIZES } from "@constants/index";
 import styles from "./popularjobs.style";
 import PopularJobCard from "@components/common/cards/popular/PopularJobCard";
-import useFetch from "@hooks/useFetch";
+import useFetch from "../../../hooks/useFetch";
 
 const Popularjobs = () => {
 	const router = useRouter();
