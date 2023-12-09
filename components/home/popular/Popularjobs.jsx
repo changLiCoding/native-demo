@@ -1,14 +1,65 @@
-import React from 'react'
-import { View, Text } from 'react-native'
-
-import styles from './popularjobs.style'
+import React, { useState } from "react";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	ActivityIndicator,
+	FlatList,
+} from "react-native";
+import { useRouter } from "expo-router";
+import { COLORS, SIZES } from "@constants/index";
+import styles from "./popularjobs.style";
+import PopularJobCard from "@components/common/cards/popular/PopularJobCard";
+import useFetch from "@hooks/useFetch";
 
 const Popularjobs = () => {
-  return (
-    <View>
-      <Text>Popularjobs</Text>
-    </View>
-  )
-}
+	const router = useRouter();
 
-export default Popularjobs
+	const { data, error, isLoading, refecthData } = useFetch("search", {
+		query: "react",
+		num_pages: 1,
+	});
+
+	console.log(data);
+
+	return (
+		<View style={styles.container}>
+			<View style={styles.header}>
+				<Text style={styles.headerTitle}>Popularjobs</Text>
+				<TouchableOpacity>
+					<Text style={styles.headerBtn}>See all</Text>
+				</TouchableOpacity>
+			</View>
+			<View style={styles.cardsContainer}>
+				{isLoading ? (
+					<ActivityIndicator
+						size='large'
+						color={COLORS.primary}
+					/>
+				) : error ? (
+					<Text>Something went wrong</Text>
+				) : (
+					<FlatList
+						data={[1, 2, 3, 4, 5, 6]}
+						renderItem={({ item }) => (
+							<PopularJobCard
+								keyExtractor={(item) => item}
+								item={item}
+								onPress={({ item }) =>
+									router.push(`JobDetails/${item}`, {
+										job: item,
+									})
+								}
+							/>
+						)}
+						keyExtractor={(item) => item?.job_id}
+						contentContainerStyle={{ columnGap: SIZES.medium }}
+						horizontal
+					/>
+				)}
+			</View>
+		</View>
+	);
+};
+
+export default Popularjobs;
