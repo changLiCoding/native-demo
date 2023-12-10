@@ -48,6 +48,7 @@ const Popularjobs = () => {
 								keyExtractor={(item) => item}
 								item={item}
 								handleCardPress={(item) => {
+									console.log(item);
 									return router.push(`job-details/${item.job_id}`);
 								}}
 								// onPress={({ item }) =>
