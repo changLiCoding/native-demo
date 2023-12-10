@@ -20,7 +20,7 @@ import {
 import { COLORS, icons, SIZES } from "../../constants";
 import useFetch from "../../hooks/useFetch";
 
-const tabs = ["About", "Qualifications", "Pesponsibilities"];
+const tabs = ["About", "Qualifications", "Responsibilities"];
 
 function JobDetails() {
 	const params = useGlobalSearchParams();
@@ -35,7 +35,30 @@ function JobDetails() {
 	const [refreshing, setRefreshing] = React.useState(false);
 	const onRefresh = () => {};
 
-	console.log("data :", data);
+	const displayTabContent = () => {
+		switch (activeTab) {
+			case tabs[0]:
+				return (
+					<JobAbout info={data[0].job_description ?? "No data provided"} />
+				);
+			case tabs[1]:
+				return (
+					<Specifics
+						title={tabs[1]}
+						points={data[0].job_highlights?.Qualifications ?? ["N/A"]}
+					/>
+				);
+			case tabs[2]:
+				return (
+					<Specifics
+						title={tabs[2]}
+						points={data[0].job_highlights?.Responsibilities ?? ["N/A"]}
+					/>
+				);
+			default:
+				return null;
+		}
+	};
 
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -91,9 +114,16 @@ function JobDetails() {
 								activeTab={activeTab}
 								setActiveTab={setActiveTab}
 							/>
+							{displayTabContent()}
 						</View>
 					)}
 				</ScrollView>
+				<JobFooter
+					url={
+						data[0]?.job_google_link ??
+						"https://careers.google.com/jobs/results"
+					}
+				/>
 			</>
 		</SafeAreaView>
 	);

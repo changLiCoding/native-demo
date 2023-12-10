@@ -34,7 +34,6 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
 					);
 				}}
 			/>
-			<Text>Tabs</Text>
 		</View>
 	);
 };
