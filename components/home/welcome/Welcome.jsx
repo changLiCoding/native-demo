@@ -13,11 +13,10 @@ import { useRouter } from "expo-router";
 import { icons, SIZES } from "@constants";
 const jobTypes = ["Full Time", "Part Time", "Internship", "Freelance"];
 
-const Welcome = () => {
+const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
 	const router = useRouter();
 	const [activeJobType, setActiveJobType] = useState("Full Time");
 
-	const [searchedJob, setSearchedJob] = useState("");
 	// console.log(searchedJob);
 	return (
 		<View>
@@ -32,20 +31,21 @@ const Welcome = () => {
 						style={styles.searchInput}
 						placeholder='What are you looking for?'
 						placeholderTextColor='#000'
-						onFocus={() => console.log("TextInput focused")}
 						// onPressIn={() => console.log("TextInput pressed")}
 						// onPressOut={() => console.log("TextInput pressed")}
-						onChange={(e) => {
+						onChangeText={(text) => {
+							console.log("text: ", text);
 							// console.log("e.target: ", e.target);
-							setSearchedJob(e.target.value);
+							// setSearchedJob(e.target.value);
+							setSearchTerm(text);
 							// console.log(searchedJob);
 						}}
-						value={searchedJob}
+						value={searchTerm}
 					/>
 				</View>
 				<TouchableOpacity
 					style={styles.searchBtn}
-					onPress={() => console.log("Search btn clicked")}>
+					onPress={handleClick}>
 					<Image
 						source={icons.search}
 						style={styles.searchBtnImage}

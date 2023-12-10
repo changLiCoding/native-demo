@@ -10,6 +10,9 @@ import {
 } from "@components/index";
 function Home() {
 	const router = useRouter();
+
+	const [searchTerm, setSearchTerm] = useState("");
+
 	return (
 		<SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
 			{/* <Text>index</Text> */}
@@ -39,7 +42,15 @@ function Home() {
 						flex: 1,
 						padding: SIZES.medium,
 					}}>
-					<Welcome />
+					<Welcome
+						searchTerm={searchTerm}
+						setSearchTerm={setSearchTerm}
+						handleClick={() => {
+							if (searchTerm) {
+								router.push(`/search/${searchTerm}`);
+							}
+						}}
+					/>
 					<Popularjobs />
 					<Nearbyjobs />
 				</View>
