@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { X_RAPIDAPI_KEY } from "@env";
 
 const useFetch = (endpoint, query) => {
-	const rapidapiKey = process.env.X_RapidAPI_Key;
+	const rapidapiKey = X_RAPIDAPI_KEY;
+
 	const [data, setData] = useState([]);
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
@@ -25,7 +27,6 @@ const useFetch = (endpoint, query) => {
 			const response = await axios.request(options);
 			setData(response.data.data);
 			setIsLoading(false);
-			console.log(response.data);
 		} catch (error) {
 			setError(error);
 		} finally {
