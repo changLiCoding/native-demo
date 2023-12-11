@@ -17,7 +17,10 @@ const Popularjobs = () => {
 
 	const [selectedJob, setSelectedJob] = useState(null);
 
-	const handleCardPress = (item) => {};
+	const handleCardPress = (item) => {
+		router.push(`job-details/${item.job_id}`);
+		setSelectedJob(item.job_id);
+	};
 
 	const { data, error, isLoading, refecthData } = useFetch("search", {
 		query: "react",
@@ -47,15 +50,8 @@ const Popularjobs = () => {
 							<PopularJobCard
 								keyExtractor={(item) => item}
 								item={item}
-								handleCardPress={(item) => {
-									console.log(item);
-									return router.push(`job-details/${item.job_id}`);
-								}}
-								// onPress={({ item }) =>
-								// 	router.push(`job-details/${item.job_id}`, {
-								// 		job: item,
-								// 	})
-								// }
+								handleCardPress={handleCardPress}
+								selectedJob={selectedJob}
 							/>
 						)}
 						keyExtractor={(item) => item?.job_id}
